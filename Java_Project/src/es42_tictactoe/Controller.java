@@ -1,4 +1,4 @@
-package gameProject;
+package es42_tictactoe;
 
 import java.net.URL;
 import javafx.stage.Stage;

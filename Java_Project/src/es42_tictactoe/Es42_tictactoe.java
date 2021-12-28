@@ -1,4 +1,4 @@
-package gameProject;
+package es42_tictactoe;
 
 import java.net.URL;
 import javafx.application.Application;
@@ -14,7 +14,7 @@ import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 import net.java.games.input.Version;
         
-public class Main extends Application{
+public class Es42_tictactoe extends Application{
     private Scene scene;
     private Parent root;
     public Controller[] controllersList;
@@ -66,7 +66,7 @@ public class Main extends Application{
         bB2 = new SimpleIntegerProperty(0);
         sB2 = new SimpleIntegerProperty(0);
         
-        Image icon = new Image(Main.class.getResourceAsStream("ITI.png"));
+        Image icon = new Image(Es42_tictactoe.class.getResourceAsStream("ITI.png"));
         try{
             URL fxml = this.getClass().getResource("HomeScene.fxml");
             root = FXMLLoader.load(fxml); 
