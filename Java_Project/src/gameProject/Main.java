@@ -1,4 +1,4 @@
-package project;
+package gameProject;
 
 import java.net.URL;
 import javafx.application.Application;
