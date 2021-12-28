@@ -1,1 +1,1 @@
-This is Tic Tac Toe Project
+This is Tic Tac Toe Project.
