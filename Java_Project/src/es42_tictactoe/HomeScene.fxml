@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="350.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es42_tictactoe.Controller">
+<AnchorPane prefHeight="831.0" prefWidth="1168.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es42_tictactoe.Controller">
    <children>
-      <ImageView fitHeight="350.0" fitWidth="469.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="831.0" fitWidth="1168.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@Home.gif" />
          </image>
@@ -18,17 +18,17 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Button layoutX="171.0" layoutY="118.0" mnemonicParsing="false" onAction="#singlePlayer" stylesheets="@Home.css" text="Single Player" textFill="WHITE">
+      <Button fx:id="btn1" layoutX="171.0" layoutY="118.0" mnemonicParsing="false" onAction="#singlePlayer" stylesheets="@Home.css" text="Single Player" textFill="WHITE">
          <font>
             <Font name="Gabriola" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="176.0" layoutY="175.0" mnemonicParsing="false" onAction="#multiPlayer" stylesheets="@Home.css" text="Multiplayer" textFill="WHITE">
+      <Button fx:id="btn2" layoutX="176.0" layoutY="175.0" mnemonicParsing="false" onAction="#multiPlayer" stylesheets="@Home.css" text="Multiplayer" textFill="WHITE">
          <font>
             <Font name="Gabriola" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="204.0" layoutY="234.0" mnemonicParsing="false" onAction="#exit" stylesheets="@Home.css" text="Exit" textFill="WHITE">
+      <Button fx:id="btn3" layoutX="204.0" layoutY="234.0" mnemonicParsing="false" onAction="#exit" stylesheets="@Home.css" text="Exit" textFill="WHITE">
          <font>
             <Font name="Gabriola" size="24.0" />
          </font>
