@@ -2,7 +2,10 @@ package es42_tictactoe;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.PauseTransition;
+import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
@@ -32,9 +35,12 @@ public class Controller implements Initializable{
 
     @FXML
     private Button btn3;
-
+    /* Static Variables Section */
     public static Button[] menuBtns;
-        @Override
+    public static TilePane gameTile;
+    public static TextField[][] gameBoxes;
+    
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         menuBtns = new Button[3];
         menuBtns[0] = btn1;
@@ -73,9 +79,9 @@ public class Controller implements Initializable{
     }//singlePlayer    
     
     public void multiPlayer(ActionEvent event){
-        TilePane gameTile = new TilePane();//contain the boxes of the game
+        gameTile = new TilePane();//contain the boxes of the game
         gameTile.setPrefColumns(3);
-        TextField[][] gameBoxes = new TextField[3][3];//The boxes of the game
+        gameBoxes = new TextField[3][3];//The boxes of the game
         int[] player = new int[2];//0 --> playerX && 1 --> playerO
         player[0] = 0;//Default begin : playerX score
         player[1] = 0;//Default begin : playerO score
@@ -215,6 +221,6 @@ public class Controller implements Initializable{
     
     public void exit(ActionEvent event){
         stage = (Stage)(((Node)(event.getSource())).getScene().getWindow());
-        stage.close();
+        System.exit(0);
     }//exit
 }//class Controller
