@@ -4,6 +4,3 @@
 .button:hover{
     -fx-background-color: #3333ff;
 }
-.button:pressed{
-    -fx-background-color:#3333ff;
-}

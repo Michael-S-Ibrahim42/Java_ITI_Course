@@ -1,5 +1,6 @@
 package es42_tictactoe;
 
+import static es42_tictactoe.Es42_tictactoe.sceneID;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,10 +36,15 @@ public class Controller implements Initializable{
 
     @FXML
     private Button btn3;
+    
+  
     /* Static Variables Section */
     public static Button[] menuBtns;
-    public static TilePane gameTile;
     public static TextField[][] gameBoxes;
+    public static boolean[] isWinner;
+    public static int[] turn;
+    public static int[] cord;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -49,6 +55,7 @@ public class Controller implements Initializable{
     }//initialize
     
     public void homeScene(ActionEvent event){
+        sceneID = 0;
         try{
             URL fxml = this.getClass().getResource("HomeScene.fxml");
             root = FXMLLoader.load(fxml); 
@@ -65,6 +72,7 @@ public class Controller implements Initializable{
     }//homeScene
     
     public void singlePlayer(ActionEvent event){
+        sceneID = 1;
         try{
             URL fxml = this.getClass().getResource("WinScene.fxml");
             root = FXMLLoader.load(fxml);
@@ -79,17 +87,23 @@ public class Controller implements Initializable{
     }//singlePlayer    
     
     public void multiPlayer(ActionEvent event){
-        gameTile = new TilePane();//contain the boxes of the game
-        gameTile.setPrefColumns(3);
+        sceneID = 2;
+        try{
+            URL fxml = this.getClass().getResource("MultiplayerScene.fxml");
+            root = FXMLLoader.load(fxml);
+        }//try
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }//catch        
         gameBoxes = new TextField[3][3];//The boxes of the game
-        int[] player = new int[2];//0 --> playerX && 1 --> playerO
-        player[0] = 0;//Default begin : playerX score
-        player[1] = 0;//Default begin : playerO score
-        boolean isWinner[] = new boolean[1];
+        int[] playerScore = new int[2];//0 --> playerX && 1 --> playerO
+        playerScore[0] = 0;//Default begin : playerX score
+        playerScore[1] = 0;//Default begin : playerO score
+        isWinner = new boolean[1];
         isWinner[0] = false; // defines whether there is a winner or not
-        int[] turn = new int[1]; //0 --> 'O' && 1 --> 'X'
+        turn = new int[1]; //0 --> 'O' && 1 --> 'X'
         turn[0] = 1; // To begin playing with 'X'
-        int[] cord = new int[2];//The "X,Y" Coordinates ... 0 --> 'Y' && 1 --> 'X'
+        cord = new int[2];//The "X,Y" Coordinates ... 0 --> 'Y' && 1 --> 'X'
         cord[0] = 0;//set default 'Y' value
         cord[1] = 0;//set default 'X' value
         try{
@@ -108,42 +122,6 @@ public class Controller implements Initializable{
                 gameBox.setPrefSize(100, 100);
                 gameBox.setOnKeyPressed((e) ->{
                     switch(e.getCode()){
-                        case RIGHT:
-                            if( !isWinner[0] ){
-                                cord[1]++;
-                                if(cord[1] == 3) cord[1] = 0;
-                                gameBoxes[cord[0]][cord[1]].requestFocus();
-                                gameBoxes[cord[0]][cord[1]].deselect();
-                            }//if
-                            break;
-                            
-                        case LEFT:
-                            if( !isWinner[0] ){
-                                cord[1]--;
-                                if(cord[1] < 0) cord[1] = 2;
-                                gameBoxes[cord[0]][cord[1]].requestFocus();
-                                gameBoxes[cord[0]][cord[1]].deselect();
-                            }//if
-                            break;
-
-                        case DOWN:
-                            if( !isWinner[0] ){
-                                cord[0]++;
-                                if(cord[0] == 3) cord[0] = 0;
-                                gameBoxes[cord[0]][cord[1]].requestFocus();
-                                gameBoxes[cord[0]][cord[1]].deselect();
-                            }//if
-                            break;
-
-                        case UP:
-                            if( !isWinner[0] ){
-                                cord[0]--;
-                                if(cord[0] < 0) cord[0] = 2;
-                                gameBoxes[cord[0]][cord[1]].requestFocus();
-                                gameBoxes[cord[0]][cord[1]].deselect();
-                            }//if
-                            break;
-
                         case SPACE://put 'O' turn[0] = 0, else 'x' 
                             if( isWinner[0] ){
                                 break;
@@ -163,7 +141,7 @@ public class Controller implements Initializable{
                                         break;
                                 }
                                 if(gameBoxes[cord[0]][0].getText().equals(gameBoxes[cord[0]][1].getText()) && gameBoxes[cord[0]][0].getText().equals(gameBoxes[cord[0]][2].getText())){
-                                    player[turn[0]]++;//Player won
+                                    playerScore[turn[0]]++;//Player won
                                     gameBoxes[cord[0]][0].setStyle("-fx-background-color: lime");
                                     gameBoxes[cord[0]][1].setStyle("-fx-background-color: lime");
                                     gameBoxes[cord[0]][2].setStyle("-fx-background-color: lime");
@@ -173,7 +151,7 @@ public class Controller implements Initializable{
                                     delay.play();
                                 }//if 
                                 else if(gameBoxes[0][cord[1]].getText().equals(gameBoxes[1][cord[1]].getText()) && gameBoxes[0][cord[1]].getText().equals(gameBoxes[2][cord[1]].getText())){
-                                    player[turn[0]]++;//Player Won
+                                    playerScore[turn[0]]++;//Player Won
                                     gameBoxes[0][cord[1]].setStyle("-fx-background-color: lime");
                                     gameBoxes[1][cord[1]].setStyle("-fx-background-color: lime");
                                     gameBoxes[2][cord[1]].setStyle("-fx-background-color: lime");
@@ -184,7 +162,7 @@ public class Controller implements Initializable{
                                 }//else if
                                 else if(cord[0] == cord[1]){
                                     if(gameBoxes[0][0].getText().equals(gameBoxes[1][1].getText()) && gameBoxes[0][0].getText().equals(gameBoxes[2][2].getText())){
-                                        player[turn[0]]++;//Player Won
+                                        playerScore[turn[0]]++;//Player Won
                                         gameBoxes[0][0].setStyle("-fx-background-color: lime");
                                         gameBoxes[1][1].setStyle("-fx-background-color: lime");
                                         gameBoxes[2][2].setStyle("-fx-background-color: lime");
@@ -196,7 +174,7 @@ public class Controller implements Initializable{
                                 }//else if
                                 else if((cord[0] + cord[1]) == 2){
                                     if(gameBoxes[0][2].getText().equals(gameBoxes[1][1].getText()) && gameBoxes[0][2].getText().equals(gameBoxes[2][0].getText())){
-                                        player[turn[0]]++;//Player Won
+                                        playerScore[turn[0]]++;//Player Won
                                         gameBoxes[0][2].setStyle("-fx-background-color: lime");
                                         gameBoxes[1][1].setStyle("-fx-background-color: lime");
                                         gameBoxes[2][0].setStyle("-fx-background-color: lime");
@@ -210,11 +188,11 @@ public class Controller implements Initializable{
                             break;
                     }//switch
                 });
-                gameTile.getChildren().add(gameBox);
+//                gameTile.getChildren().add(gameBox);
             }//for ... embedded for
         }//for
-        scene = new Scene(gameTile);
-        stage = (Stage)(((Node)event.getSource()).getScene().getWindow());
+        stage = (Stage)(((Node)(event.getSource())).getScene().getWindow());
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }//multiPlayer
