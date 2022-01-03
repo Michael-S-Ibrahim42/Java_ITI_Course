@@ -88,13 +88,9 @@ public class Controller implements Initializable{
     
     public void multiPlayer(ActionEvent event){
         sceneID = 2;
-        try{
-            URL fxml = this.getClass().getResource("MultiplayerScene.fxml");
-            root = FXMLLoader.load(fxml);
-        }//try
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }//catch        
+        TilePane gameTile = new TilePane();
+        
+        gameTile.setPrefColumns(3);
         gameBoxes = new TextField[3][3];//The boxes of the game
         int[] playerScore = new int[2];//0 --> playerX && 1 --> playerO
         playerScore[0] = 0;//Default begin : playerX score
@@ -188,17 +184,16 @@ public class Controller implements Initializable{
                             break;
                     }//switch
                 });
-//                gameTile.getChildren().add(gameBox);
+                gameTile.getChildren().add(gameBox);
             }//for ... embedded for
         }//for
         stage = (Stage)(((Node)(event.getSource())).getScene().getWindow());
-        scene = new Scene(root);
+        scene = new Scene(gameTile);
         stage.setScene(scene);
         stage.show();
     }//multiPlayer
     
     public void exit(ActionEvent event){
-        stage = (Stage)(((Node)(event.getSource())).getScene().getWindow());
         System.exit(0);
     }//exit
 }//class Controller

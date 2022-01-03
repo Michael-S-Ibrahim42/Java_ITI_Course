@@ -56,7 +56,6 @@ public class Es42_tictactoe extends Application {
                 }//else
             }//if
         }//for
-
         Image icon = new Image(Es42_tictactoe.class.getResourceAsStream("ITI.png"));
         try {
             URL fxml = this.getClass().getResource("HomeScene.fxml");
@@ -65,7 +64,9 @@ public class Es42_tictactoe extends Application {
         catch (Exception exception) {
             System.out.println(exception.getMessage());
         }//catch
+        es42_tictactoe.Controller.menuBtns[0].setStyle("-fx-background-color: #3333ff;");
         Thread stickThread = new Thread(() -> {
+            boolean waitPress = false;
             int setMenuPos = 0;
             int clrMenuPos = 0;
             int xPos = 0;
@@ -77,6 +78,7 @@ public class Es42_tictactoe extends Application {
                 switch (sceneID) {
                     case 0:
                         while (queue1.getNextEvent(event)) {
+                            waitPress = true;
                             Component stickComp = event.getComponent();
                             float stickValue = event.getValue();
                             switch (stickComp.getName()) {
@@ -122,6 +124,7 @@ public class Es42_tictactoe extends Application {
                         break;
                     case 1:
                         while (queue1.getNextEvent(event)) {
+                            waitPress = true;
                             Component stickComp = event.getComponent();
                             float stickValue = event.getValue();
                             switch (stickComp.getName()) {
@@ -168,8 +171,9 @@ public class Es42_tictactoe extends Application {
                             }//switch
                         }//while
                         break;
-                    case 2:
+                    case 2: //multiplayer Scene
                         while (queue1.getNextEvent(event) || queue2.getNextEvent(event)) {
+                            waitPress = true;
                             Component stickComp = event.getComponent();
                             float stickValue = event.getValue();
                             switch (stickComp.getName()) {
@@ -238,14 +242,19 @@ public class Es42_tictactoe extends Application {
                                     }//else if
                                     break;
                                 case "Button 1":
-                                    System.exit(0);
-                                    break;
-                                case "Button 2":
-                                    final int firePos = setMenuPos;
+                                    sceneID = 0;
                                     Platform.runLater(new Runnable() {
                                         @Override
                                         public void run() {
-                                            //es42_tictactoe.Controller.menuBtns[firePos].fire();
+                                            primaryStage.setScene(scene);
+                                        }//run method
+                                    });//Platform runLater
+                                    break;
+                                case "Button 2":
+                                    Platform.runLater(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            
                                         }//run method
                                     });//Platform runLater
                                     break;
@@ -276,7 +285,6 @@ public class Es42_tictactoe extends Application {
     }//start
 
     @Override
-
     public void stop() {
         System.exit(0);
     }//stop
