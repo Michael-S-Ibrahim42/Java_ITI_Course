@@ -150,10 +150,8 @@ public class Es42_tictactoe extends Application implements Initializable {
                 gamepad1.poll();
                 gamepad2.poll();
                 switch (sceneID) {
-                    case 0:
-                        System.out.println("You are in home");
+                    case 0://Home Scene
                         while (queue1.getNextEvent(event)) {
-
                             Component stickComp = event.getComponent();
                             float stickValue = event.getValue();
                             switch (stickComp.getName()) {
@@ -190,8 +188,6 @@ public class Es42_tictactoe extends Application implements Initializable {
                                     if (stickValue == 0) {
                                         break;
                                     }//if
-                                    System.out.println("set" + setMenuPos);
-                                    System.out.println("clr" + clrMenuPos);
                                     final int firePos = setMenuPos;
                                     Platform.runLater(() -> {
                                         es42_tictactoe.Es42_tictactoe.menuBtns[firePos].fire();
@@ -253,7 +249,7 @@ public class Es42_tictactoe extends Application implements Initializable {
                                 case "X Axis":
                                     if (stickValue == 1.0f) {//I'm going right
                                         if (!isWinner[0]) {
-                                            cord[1]++;
+                                            cord[1]++;//X coordinate
                                             if (cord[1] == 3) {
                                                 cord[1] = 0;
                                             }
@@ -311,8 +307,6 @@ public class Es42_tictactoe extends Application implements Initializable {
                                     );//Platform runLater
                                     break;
                                 case "Button 2":
-                                    System.out.println(stickValue);
-
                                     if (isWinner[0] || stickValue == 0) {
                                         break;
                                     }//if
@@ -323,7 +317,6 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                 gameBoxes[cord[0]][cord[1]].setStyle("-fx-text-inner-color: blue");
                                                 turn[0] = 1;
                                                 break;
-
                                             case 1:
                                                 gameBoxes[cord[0]][cord[1]].setText("x");
                                                 gameBoxes[cord[0]][cord[1]].setStyle("-fx-text-inner-color: red");
@@ -344,11 +337,10 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                         System.out.println(e.getMessage());
                                                     }//catch
                                                     winScene = new Scene(winRoot);
-                                                    primaryStage.setScene(winScene);
                                                 }//run
                                             });
                                             PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                                            delay.setOnFinished(x -> stage.setScene(scene));
+                                            delay.setOnFinished(x -> primaryStage.setScene(winScene));
                                             delay.play();
                                         }//if 
                                         else if (gameBoxes[0][cord[1]].getText().equals(gameBoxes[1][cord[1]].getText()) && gameBoxes[0][cord[1]].getText().equals(gameBoxes[2][cord[1]].getText())) {
@@ -365,7 +357,6 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                         System.out.println(e.getMessage());
                                                     }//catch
                                                     winScene = new Scene(winRoot);
-                                                    primaryStage.setScene(winScene);
                                                 }//run
                                             });
                                             PauseTransition delay = new PauseTransition(Duration.seconds(2));
@@ -387,7 +378,6 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                             System.out.println(e.getMessage());
                                                         }//catch
                                                         winScene = new Scene(winRoot);
-                                                        primaryStage.setScene(winScene);
                                                     }//run
                                                 });
                                                 PauseTransition delay = new PauseTransition(Duration.seconds(2));
@@ -410,7 +400,6 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                             System.out.println(e.getMessage());
                                                         }//catch
                                                         winScene = new Scene(winRoot);
-                                                        primaryStage.setScene(winScene);
                                                     }//run
                                                 });
                                                 PauseTransition delay = new PauseTransition(Duration.seconds(2));
@@ -423,7 +412,7 @@ public class Es42_tictactoe extends Application implements Initializable {
                             }//switch
                         }//while
                         break;
-                    default:
+                    default://Debugging Purpose
                         System.out.println("Out Of bounds sceneID Value");
                         System.exit(0);
                 }//switch
