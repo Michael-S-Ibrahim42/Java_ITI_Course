@@ -30,6 +30,7 @@ public class Es42_tictactoe extends Application implements Initializable {
 
     public Stage stage;
     public Scene scene;
+    public Scene winScene;
     public Parent root;
     public Parent winRoot;
     public Parent loseRoot;
@@ -95,12 +96,6 @@ public class Es42_tictactoe extends Application implements Initializable {
         cord = new int[2];//The "X,Y" Coordinates ... 0 --> 'Y' && 1 --> 'X'
         cord[0] = 0;//set default 'Y' value
         cord[1] = 0;//set default 'X' value
-        try {
-            URL fxml = this.getClass().getResource("WinScene.fxml");
-            winRoot = FXMLLoader.load(fxml);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }//catch
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 TextField gameBox = new TextField();
@@ -141,8 +136,7 @@ public class Es42_tictactoe extends Application implements Initializable {
         }//for
         Image icon = new Image(Es42_tictactoe.class.getResourceAsStream("ITI.png"));
         try {
-            URL fxml = this.getClass().getResource("HomeScene.fxml");
-            root = FXMLLoader.load(fxml);
+            root = FXMLLoader.load(this.getClass().getResource("HomeScene.fxml"));
         }//try
         catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -341,7 +335,18 @@ public class Es42_tictactoe extends Application implements Initializable {
                                             gameBoxes[cord[0]][0].setStyle("-fx-background-color: lime");
                                             gameBoxes[cord[0]][1].setStyle("-fx-background-color: lime");
                                             gameBoxes[cord[0]][2].setStyle("-fx-background-color: lime");
-                                            scene = new Scene(winRoot);
+                                            Platform.runLater(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        winRoot = FXMLLoader.load(this.getClass().getResource("WinScene.fxml"));
+                                                    } catch (Exception e) {
+                                                        System.out.println(e.getMessage());
+                                                    }//catch
+                                                    winScene = new Scene(winRoot);
+                                                    primaryStage.setScene(winScene);
+                                                }//run
+                                            });
                                             PauseTransition delay = new PauseTransition(Duration.seconds(2));
                                             delay.setOnFinished(x -> stage.setScene(scene));
                                             delay.play();
@@ -351,9 +356,20 @@ public class Es42_tictactoe extends Application implements Initializable {
                                             gameBoxes[0][cord[1]].setStyle("-fx-background-color: lime");
                                             gameBoxes[1][cord[1]].setStyle("-fx-background-color: lime");
                                             gameBoxes[2][cord[1]].setStyle("-fx-background-color: lime");
-                                            scene = new Scene(winRoot);
+                                            Platform.runLater(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        winRoot = FXMLLoader.load(this.getClass().getResource("WinScene.fxml"));
+                                                    } catch (Exception e) {
+                                                        System.out.println(e.getMessage());
+                                                    }//catch
+                                                    winScene = new Scene(winRoot);
+                                                    primaryStage.setScene(winScene);
+                                                }//run
+                                            });
                                             PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                                            delay.setOnFinished(x -> stage.setScene(scene));
+                                            delay.setOnFinished(x -> primaryStage.setScene(winScene));
                                             delay.play();
                                         }//else if
                                         else if (cord[0] == cord[1]) {
@@ -362,9 +378,20 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                 gameBoxes[0][0].setStyle("-fx-background-color: lime");
                                                 gameBoxes[1][1].setStyle("-fx-background-color: lime");
                                                 gameBoxes[2][2].setStyle("-fx-background-color: lime");
-                                                scene = new Scene(winRoot);
+                                                Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            winRoot = FXMLLoader.load(this.getClass().getResource("WinScene.fxml"));
+                                                        } catch (Exception e) {
+                                                            System.out.println(e.getMessage());
+                                                        }//catch
+                                                        winScene = new Scene(winRoot);
+                                                        primaryStage.setScene(winScene);
+                                                    }//run
+                                                });
                                                 PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                                                delay.setOnFinished(x -> stage.setScene(scene));
+                                                delay.setOnFinished(x -> primaryStage.setScene(winScene));
                                                 delay.play();
                                             }//if
                                         }//else if
@@ -374,9 +401,20 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                 gameBoxes[0][2].setStyle("-fx-background-color: lime");
                                                 gameBoxes[1][1].setStyle("-fx-background-color: lime");
                                                 gameBoxes[2][0].setStyle("-fx-background-color: lime");
-                                                scene = new Scene(winRoot);
+                                                Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            winRoot = FXMLLoader.load(this.getClass().getResource("WinScene.fxml"));
+                                                        } catch (Exception e) {
+                                                            System.out.println(e.getMessage());
+                                                        }//catch
+                                                        winScene = new Scene(winRoot);
+                                                        primaryStage.setScene(winScene);
+                                                    }//run
+                                                });
                                                 PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                                                delay.setOnFinished(x -> stage.setScene(scene));
+                                                delay.setOnFinished(x -> primaryStage.setScene(winScene));
                                                 delay.play();
                                             }//if
                                         }//else if
