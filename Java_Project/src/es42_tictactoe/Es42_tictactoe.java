@@ -566,7 +566,7 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                 Move perfectMove = findBestMove();
                                                 minimaxBoard[perfectMove.row][perfectMove.col] = 'o';
                                                 gameBoxes[perfectMove.row][perfectMove.col].setText("o");
-                                                gameBoxes[perfectMove.row][perfectMove.col].setStyle("-fx-text-inner-color: blue");
+                                                gameBoxes[perfectMove.row][perfectMove.col].setStyle("-fx-text-inner-color: red");
                                                 if (evaluate() == 10) {//Computer won
                                                     Platform.runLater(new Runnable() {
                                                         @Override
@@ -613,7 +613,7 @@ public class Es42_tictactoe extends Application implements Initializable {
                                                 Move perfectMove = findBestMove();
                                                 minimaxBoard[perfectMove.row][perfectMove.col] = 'o';
                                                 gameBoxes[perfectMove.row][perfectMove.col].setText("o");
-                                                gameBoxes[perfectMove.row][perfectMove.col].setStyle("-fx-text-inner-color: blue");
+                                                gameBoxes[perfectMove.row][perfectMove.col].setStyle("-fx-text-inner-color: red");
                                                 if (evaluate() == 10) {//Computer won
                                                     Platform.runLater(new Runnable() {
                                                         @Override
@@ -638,7 +638,7 @@ public class Es42_tictactoe extends Application implements Initializable {
                                             Move perfectMove = findBestMove();
                                             minimaxBoard[perfectMove.row][perfectMove.col] = 'o';
                                             gameBoxes[perfectMove.row][perfectMove.col].setText("o");
-                                            gameBoxes[perfectMove.row][perfectMove.col].setStyle("-fx-text-inner-color: blue");
+                                            gameBoxes[perfectMove.row][perfectMove.col].setStyle("-fx-text-inner-color: red");
                                             if (evaluate() == 10) {//Computer won
                                                 Platform.runLater(new Runnable() {
                                                     @Override
